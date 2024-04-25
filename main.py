@@ -66,7 +66,7 @@ if len(words) >= 50:
 else:
     raise Exception("Not enough words")  # Need to get a new word
 
-with open("./ruby_site/here.txt", "w") as out:
+with open("./ruby_site/words.txt", "w") as out:
     out.write(("\n").join(words))
 
 with open("./ruby_site/keyword.txt", "w") as word:
