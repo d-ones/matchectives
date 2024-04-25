@@ -1,6 +1,6 @@
 import requests
 
-keyword = "arbitrary"
+keyword = "heavy"
 
 req = requests.get(f"https://api.datamuse.com/words?rel_jja={keyword}&md=d&max=150")
 
@@ -66,8 +66,8 @@ if len(words) >= 50:
 else:
     raise Exception("Not enough words")  # Need to get a new word
 
-with open("./ruby_site/words.txt", "w") as out:
+with open("./src/words.txt", "w") as out:
     out.write(("\n").join(words))
 
-with open("./ruby_site/keyword.txt", "w") as word:
+with open("./src/keyword.txt", "w") as word:
     word.write(keyword)
