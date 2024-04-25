@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>adjectle</title>
+  </head>
+  <body onload="init_score();">
+    <iframe id="frmFile" src="here.txt" onload="LoadFile();" style="display: none;"></iframe>
+    <iframe id="frmWordFile" src="keyword.txt" onload="LoadKeyword();" style="display: none;"></iframe>
+  <div class="container">
+<form id="main_form" onsubmit="answer_fc(this.text); this.reset();" novalidate>
+    <div class="group">
+      <input id="entrybox" type="text" required autocomplete="off">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label id="keyword"></label>
+      <div class="counter_holder">
+      <div class="num" id="counter"></div>
+      <div class="num" id="warner"></div>
+    </div>
+    </div>
+  </form>
+</div>
+</body>
+<script type="text/javascript">
+
+  var score = '';
+  var guesses = 0;
+  let arrLines = [];
+  let prior_guesses = [];
+  let keyword = '';
+
+  function init_score() {
+    document.getElementById('counter').innerHTML = score;
+    document.getElementById('keyword').innerHTML = keyword;
+}
+
+  function LoadFile() {
+      var oFrame = document.getElementById("frmFile");
+      var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
+      while (strRawContents.indexOf("\r") >= 0)
+          strRawContents = strRawContents.replace("\r", "");
+      arrLines = strRawContents.split("\n");
+      }
+
+  function LoadKeyword() {
+      var oFrame = document.getElementById('frmWordFile');
+      var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
+      keyword = strRawContents;
+      }
+
+  function answer_fc(ele){
+    event.preventDefault()
+      document.getElementById('warner').innerHTML = "";
+      var v1 = document.getElementById('entrybox').value;
+      if(prior_guesses.includes(v1.toLowerCase())){
+        document.getElementById('warner').innerHTML = "already guessed";
+        return;
+      }
+      prior_guesses.push(v1.toLowerCase())
+
+      guesses++;
+
+      if(arrLines.includes(v1.toLowerCase())){
+              score += "\u2705";
+      }
+      else{
+      score += "\u274C"
+    }
+      document.getElementById('counter').innerHTML = score;
+
+      if (guesses == 5) {
+          alert("Finished guessing!" + "\n\n" + score);
+          location.reload();
+      }
+  }
+</script>
+
+<style>
+
+/*
+ * Stylesheet
+ */
+* { box-sizing:border-box; }
+
+/* basic stylings ------------------------------------------ */
+body
+.container 		{
+  font-family:'Roboto';
+  width:600px;
+  margin:30px auto 0;
+  display:block;
+  background:#FFF;
+  padding:10px 50px 50px;
+}
+/* form starting stylings ------------------------------- */
+.group 			  {
+  position:relative;
+  margin-bottom:45px;
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
+
+.counter_holder{
+  justify-content: center;
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+}
+
+.num{
+  display: inline;
+  text-align: center;
+}
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:300px; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#5264AE;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+  </style>
+
+</html>
+
