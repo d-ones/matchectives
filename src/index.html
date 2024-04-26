@@ -9,7 +9,7 @@
     <iframe id="frmWordFile" src="keyword.txt" onload="LoadKeyword();" style="display: none;"></iframe>
      <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Guess 5 words most commonly described by the adjective below!
+  Guess 5 of the 50 words most commonly described by the adjective below! You get more points for the most common words!
 </div>
   <div class="container">
     <div class="group">
@@ -20,6 +20,7 @@
           <span class="close">&times;</span>
       <p id='modal-text'></p>
       <p id='modal-score'</p>
+      <div class="num" id="points"></div>
       </div>
 <form id="main_form" onsubmit="answer_fc(this.text); this.reset();" novalidate>
 
@@ -30,6 +31,7 @@
       <label id="keyword"></label>
       <div class="counter_holder">
       <div class="num" id="counter"></div>
+      <div class="num" id="point_notif"></div>
       <div class="num" id="warner"></div>
     </div>
     </div>
@@ -43,7 +45,8 @@
   let arrLines = [];
   let prior_guesses = [];
   let keyword = '';
-var modal = document.getElementById("myModal");
+  let end_score = 0
+  var modal = document.getElementById("myModal");
 
   function init_score() {
     document.getElementById('counter').innerHTML = score;
@@ -56,6 +59,7 @@ var modal = document.getElementById("myModal");
       while (strRawContents.indexOf("\r") >= 0)
           strRawContents = strRawContents.replace("\r", "");
       arrLines = strRawContents.split("\n");
+      arrLines.reverse()
       }
 
   function LoadKeyword() {
@@ -67,6 +71,7 @@ var modal = document.getElementById("myModal");
   function answer_fc(ele){
     event.preventDefault()
       document.getElementById('warner').innerHTML = "";
+      document.getElementById('point_notif').innerHTML = "";
       var v1 = document.getElementById('entrybox').value;
       if(prior_guesses.includes(v1.toLowerCase())){
         document.getElementById('warner').innerHTML = "already guessed";
@@ -76,6 +81,8 @@ var modal = document.getElementById("myModal");
 
       if(arrLines.includes(v1.toLowerCase())){
               score += "\u2705";
+              document.getElementById('point_notif').innerHTML = "+" + arrLines.indexOf(v1.toLowerCase());
+              end_score += arrLines.indexOf(v1.toLowerCase())
               guesses++;
       }
       else{
@@ -85,7 +92,7 @@ var modal = document.getElementById("myModal");
 
       if (guesses == 5) {
           modal.style.display = "block";
-          document.getElementById('modal-text').innerHTML = "Congrats! Your score is " + score.length + ".";
+          document.getElementById('modal-text').innerHTML = "Congrats! Your score is " + end_score + ".";
           document.getElementById('modal-score').innerHTML = score;
           // When the user clicks on <span> (x), close the modal
           span.onclick = function() {
@@ -302,7 +309,9 @@ input:focus ~ .highlight {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #5264AE;
+  color: white;
+  font-size: 30px;
   margin: 10% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
