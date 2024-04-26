@@ -1,5 +1,8 @@
 name: deploy
 on:
+  push:
+    paths:
+      'src/**'
   workflow_run:
     workflows: ["generate words"]
     types:
