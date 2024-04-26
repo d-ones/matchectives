@@ -6,9 +6,23 @@
   <body onload="init_score();">
     <iframe id="frmFile" src="words.txt" onload="LoadFile();" style="display: none;"></iframe>
     <iframe id="frmWordFile" src="keyword.txt" onload="LoadKeyword();" style="display: none;"></iframe>
+     <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  Guess 5 words most commonly described by the adjective below!
+</div>
   <div class="container">
-<form id="main_form" onsubmit="answer_fc(this.text); this.reset();" novalidate>
     <div class="group">
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+      <!-- Modal content -->
+          <div class="modal-content">
+          <span class="close">&times;</span>
+      <p id='modal-text'></p>
+      <p id='modal-score'</p>
+      </div>
+<form id="main_form" onsubmit="answer_fc(this.text); this.reset();" novalidate>
+
+      </div>
       <input id="entrybox" type="text" required autocomplete="off">
       <span class="highlight"></span>
       <span class="bar"></span>
@@ -28,6 +42,7 @@
   let arrLines = [];
   let prior_guesses = [];
   let keyword = '';
+var modal = document.getElementById("myModal");
 
   function init_score() {
     document.getElementById('counter').innerHTML = score;
@@ -68,10 +83,51 @@
       document.getElementById('counter').innerHTML = score;
 
       if (guesses == 5) {
-          alert("Finished guessing!" + "\n\n" + "Your score is " + score.length + ".");
-          location.reload();
+          modal.style.display = "block";
+          document.getElementById('modal-text').innerHTML = "Congrats! Your score is " + score.length + ".";
+          document.getElementById('modal-score').innerHTML = score;
+          // When the user clicks on <span> (x), close the modal
+          span.onclick = function() {
+              modal.style.display = "none";
+            location.reload();
+          }
+
+        // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function(event) {
+              if (event.target == modal) {
+              modal.style.display = "none";
+              location.reload();
+    }
+  }
       }
   }
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 </script>
 
 <style>
@@ -93,12 +149,14 @@ body
 }
 /* form starting stylings ------------------------------- */
 .group 			  {
+  margin-top: 5em;
   position:relative;
   margin-bottom:45px;
   width: 600px;
   margin: 0 auto;
 }
 input 				{
+  margin-top: 5em;
   font-size:30px;
   padding:10px 10px 10px 5px;
   display:block;
@@ -112,7 +170,7 @@ input:focus 		{ outline:none; }
   justify-content: center;
   color:#999;
   font-size:30px;
-  width:300px;
+  width:600px;
   font-weight:normal;
 }
 
@@ -140,8 +198,8 @@ label 				 {
 
 /* active state */
 input:focus ~ label, input:valid ~ label 		{
-  top:-20px;
-  font-size:14px;
+  top:-30px;
+  font-size:30px;
   color:#5264AE;
 }
 
@@ -201,6 +259,79 @@ input:focus ~ .highlight {
 	from { background:#5264AE; }
   to 	{ width:0; background:transparent; }
 }
+
+ /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #5264AE;
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+ /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 25%; /* Could be more or less, depending on screen size */
+  text-align: center;
+}
+
+.modal-text{
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: wrap-all;
+  word-break: break-all;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
   </style>
 
 </html>
