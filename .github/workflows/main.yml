@@ -35,15 +35,11 @@ jobs:
         url: ${{ steps.deployment.outputs.page_url }}
       steps:
         - name: checkout
-          with:
-            entryPoint: "./src"
           uses: actions/checkout@v4
         - name: upload
           with:
-            entryPoint: "./src"
+            path: "./src"
           uses: actions/upload-pages-artifact@master
         - name: Deploy to GitHub Pages
-          with:
-            entryPoint: "./src"
           uses: actions/deploy-pages@v4
 
