@@ -87,7 +87,7 @@
       if(arrLines.includes(v1.toLowerCase())){
               score += "\u2705";
               pnrs += v1.toLowerCase() + "+" + arrLines.indexOf(v1.toLowerCase());
-              pnrs += '\n';
+              pnrs += '<br>';
               end_score += arrLines.indexOf(v1.toLowerCase())
               document.getElementById('point_notif').innerHTML = pnrs
               guesses++;
@@ -189,6 +189,8 @@ input:focus 		{ outline:none; }
   font-size:30px;
   width:100%;
   font-weight:normal;
+  text-align: justify;
+  text-align-last: left;
 }
 
 .num{
@@ -197,7 +199,7 @@ input:focus 		{ outline:none; }
   word-wrap: wrap-all;
   word-break: break-all;
 }
-.num{
+.str_run{
   display: inline-block;
   text-align: center;
   word-wrap: wrap-all;
@@ -305,6 +307,21 @@ input:focus ~ .highlight {
 /* When moving the mouse over the close button */
 .closebtn:hover {
   color: black;
+}
+
+ /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  box-shadow: grey;
 }
 
  /* The Modal (background) */
