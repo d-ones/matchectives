@@ -1,5 +1,9 @@
 name: deploy
-on: [push]
+on:
+  workflow_run:
+    workflows: ["generate words"]
+    types:
+      - completed
 jobs:
   deploy:
       runs-on: ubuntu-latest
