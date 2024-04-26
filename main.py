@@ -1,6 +1,6 @@
 import requests
 
-keyword = "unkempt"
+keyword = "messy"
 
 req = requests.get(f"https://api.datamuse.com/words?rel_jja={keyword}&md=d&max=150")
 
