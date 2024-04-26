@@ -33,8 +33,10 @@
       <label id="keyword"></label>
       <div class="counter_holder">
       <div class="num" id="counter"></div>
-      <div class="num" id="point_notif"></div>
-      <div class="num" id="warner"></div>
+      <br>
+      <div class="str_run" id="point_notif"></div>
+      <br>
+      <div class="str_run" id="warner"></div>
     </div>
     </div>
   </form>
@@ -48,6 +50,7 @@
   let prior_guesses = [];
   let keyword = '';
   let end_score = 0
+  pnrs = '';
   var modal = document.getElementById("myModal");
 
   function init_score() {
@@ -73,7 +76,7 @@
   function answer_fc(ele){
     event.preventDefault()
       document.getElementById('warner').innerHTML = "";
-      document.getElementById('point_notif').innerHTML = "";
+      // document.getElementById('point_notif').innerHTML = "";
       var v1 = document.getElementById('entrybox').value;
       if(prior_guesses.includes(v1.toLowerCase())){
         document.getElementById('warner').innerHTML = "already guessed";
@@ -83,8 +86,10 @@
 
       if(arrLines.includes(v1.toLowerCase())){
               score += "\u2705";
-              document.getElementById('point_notif').innerHTML = "+" + arrLines.indexOf(v1.toLowerCase());
+              pnrs += v1.toLowerCase() + "+" + arrLines.indexOf(v1.toLowerCase());
+              pnrs += '\n';
               end_score += arrLines.indexOf(v1.toLowerCase())
+              document.getElementById('point_notif').innerHTML = pnrs
               guesses++;
       }
       else{
@@ -191,6 +196,11 @@ input:focus 		{ outline:none; }
   text-align: center;
   word-wrap: wrap-all;
   word-break: break-all;
+}
+.num{
+  display: inline-block;
+  text-align: center;
+  word-wrap: wrap-all;
 }
 
 /* LABEL ======================================= */
