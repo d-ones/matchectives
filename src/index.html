@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>noun town</title>
+    <title>descriptio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body onload="init_score();">
@@ -18,8 +18,8 @@
       <!-- Modal content -->
           <div class="modal-content">
           <span class="close">&times;</span>
-      <p id='modal-text'></p>
-      <p id='modal-score'</p>
+      <p class='modal-text' id='modal-text'></p>
+      <p class='modal-score' id='modal-score'</p>
       <div id='modal-footer'>
       <button type="button" class="copy-button" onclick="copyscore()">Copy</button>
             </div>
@@ -329,7 +329,13 @@ input:focus ~ .highlight {
 }
 
 .modal-text{
-  display: inline-block;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: wrap-all;
+}
+.modal-score{
+  display: block;
   text-align: center;
   vertical-align: middle;
   word-wrap: wrap-all;
