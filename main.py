@@ -29,7 +29,7 @@ def find_word(ai):
             f"https://api.datamuse.com/words?rel_jja={keyword}&md=d&max=150"
         )
     except requests.exceptions.RequestException as e:
-        find_word(ai)
+        return find_word(ai)
 
     resp = req.json()
 
@@ -82,6 +82,12 @@ def find_word(ai):
 
     words = [word["word"] for word in resp]
 
+    for word in words:
+        if " " in word:
+            to_remove.append(word)
+        if "-" in word:
+            to_remove.append(word)
+
     for entry in to_remove:
         try:
             words.remove(entry)
@@ -93,7 +99,7 @@ def find_word(ai):
         return {keyword: words}
 
     else:
-        find_word(ai)  # Need to get a new word
+        return find_word(ai)  # Need to get a new word
 
 
 ret = find_word(attempt_index)

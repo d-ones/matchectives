@@ -35,8 +35,6 @@
       <div class="num" id="counter"></div>
       <br>
       <div class="str_run" id="point_notif"></div>
-      <br>
-      <div class="str_run" id="warner"></div>
     </div>
     </div>
   </form>
@@ -50,6 +48,8 @@
   let prior_guesses = [];
   let keyword = '';
   let end_score = 0
+  let temp_score = 0
+  var forbidden_chars = [' ', '-']
   pnrs = '';
   var modal = document.getElementById("myModal");
 
@@ -75,27 +75,33 @@
 
   function answer_fc(ele){
     event.preventDefault()
-      document.getElementById('warner').innerHTML = "";
-      // document.getElementById('point_notif').innerHTML = "";
+      document.getElementById('counter').innerHTML = "";
       var v1 = document.getElementById('entrybox').value;
       if(prior_guesses.includes(v1.toLowerCase())){
-        document.getElementById('warner').innerHTML = "already guessed";
+        document.getElementById('counter').innerHTML = "\u26A0\uFE0F";
+        return;
+      }
+    if(forbidden_chars.some(substring=>v1.includes(substring))){
+        document.getElementById('counter').innerHTML = "\u26A0\uFE0F";
         return;
       }
       prior_guesses.push(v1.toLowerCase())
 
       if(arrLines.includes(v1.toLowerCase())){
+              document.getElementById('counter').innerHTML = "\u2705";
               score += "\u2705";
-              pnrs += v1.toLowerCase() + "+" + arrLines.indexOf(v1.toLowerCase());
+              temp_score = arrLines.indexOf(v1.toLowerCase());
+              temp_score += 1
+              pnrs += v1.toLowerCase() + "+" + temp_score;
               pnrs += '<br>';
-              end_score += arrLines.indexOf(v1.toLowerCase())
+              end_score += temp_score;
               document.getElementById('point_notif').innerHTML = pnrs
               guesses++;
       }
-      else{
+      else {
+      document.getElementById('counter').innerHTML = "\u274c";
       score += "\u274C"
         }
-      document.getElementById('counter').innerHTML = score;
 
       if (guesses == 5) {
           modal.style.display = "block";
@@ -104,14 +110,14 @@
           // When the user clicks on <span> (x), close the modal
           span.onclick = function() {
               modal.style.display = "none";
-              location.reload();
+              document.getElementById('entrybox').disabled = true;
               }
 
         // When the user clicks anywhere outside of the modal, close it
           window.onclick = function(event) {
               if (event.target == modal) {
               modal.style.display = "none";
-              location.reload();
+              document.getElementById('entrybox').disabled = true;
               }
             }
         }
