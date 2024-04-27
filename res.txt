@@ -16,7 +16,6 @@ square
 loving
 deep
 unequaled
-hard-to-find
 chilly
 cuddly
 trained
@@ -34,7 +33,6 @@ fearful
 detailed
 crushing
 fixed
-far-flung
 authentic
 respectful
 unknown
@@ -48,7 +46,6 @@ immaculate
 repulsive
 prickly
 late
-well-groomed
 parallel
 bumpy
 nice
@@ -157,7 +154,6 @@ Spanish
 euphoric
 tangible
 misty
-high-level
 second
 homely
 firsthand
@@ -179,11 +175,9 @@ sharp
 ugly
 superficial
 useless
-extra-large
 cultivated
 vain
 vigorous
-made-up
 serious
 tubby
 jubilant
@@ -275,7 +269,6 @@ giddy
 those
 critical
 grizzled
-clear-cut
 spotless
 nippy
 unfinished
@@ -368,7 +361,6 @@ only
 sturdy
 rapid
 every
-extra-small
 past
 fatal
 lasting
@@ -388,7 +380,6 @@ whopping
 fearless
 sunny
 beautiful
-self-assured
 cloudy
 bitter
 witty
@@ -399,7 +390,6 @@ impartial
 envious
 liquid
 optimal
-jam-packed
 pushy
 clever
 profitable
@@ -461,7 +451,6 @@ inconsequential
 earnest
 wild
 soft
-well-to-do
 bare
 stiff
 illegal
@@ -534,7 +523,6 @@ wretched
 knobby
 pastel
 disloyal
-well-informed
 smooth
 mindless
 wry
@@ -548,7 +536,6 @@ minor
 grave
 reasonable
 unruly
-happy-go-lucky
 torn
 subtle
 puzzling
@@ -641,7 +628,6 @@ jolly
 crooked
 miserly
 frayed
-well-made
 dear
 fitting
 judicious
@@ -660,7 +646,6 @@ agonizing
 utter
 giant
 austere
-short-term
 bustling
 trifling
 quintessential
@@ -763,7 +748,6 @@ jealous
 different
 terrific
 imaginative
-quick-witted
 free
 aged
 dopey
@@ -790,7 +774,6 @@ thrifty
 meek
 junior
 sweaty
-ill-fated
 gruesome
 wilted
 accurate
@@ -810,13 +793,11 @@ gummy
 verifiable
 several
 defenseless
-old-fashioned
 jumbo
 attached
 hopeful
 juvenile
 sneaky
-well-off
 intelligent
 conscious
 fuzzy
@@ -832,7 +813,6 @@ watchful
 tame
 ecstatic
 serpentine
-second-hand
 phony
 edible
 majestic
@@ -877,7 +857,6 @@ canine
 insubstantial
 oblong
 hard
-big-hearted
 nautical
 somber
 welcome
@@ -885,7 +864,6 @@ vast
 outlandish
 unlawful
 rigid
-well-worn
 plaintive
 thankful
 humble
@@ -899,7 +877,6 @@ international
 quick
 obese
 polite
-long-term
 knowledgeable
 lonely
 faithful
@@ -948,7 +925,6 @@ stingy
 high
 positive
 cheery
-black-and-white
 sympathetic
 foolhardy
 impassioned
@@ -1040,7 +1016,6 @@ exotic
 shady
 flaky
 weak
-well-lit
 bronze
 cylindrical
 clean
@@ -1078,7 +1053,6 @@ glossy
 belated
 strident
 flickering
-wide-eyed
 bruised
 even
 helpful
@@ -1185,7 +1159,6 @@ unhealthy
 early
 fair
 sandy
-far-off
 raw
 muddy
 quirky
@@ -1244,7 +1217,6 @@ glorious
 clueless
 dependent
 sour
-easy-going
 enlightened
 appropriate
 scaly
@@ -1293,7 +1265,6 @@ qualified
 genuine
 silent
 visible
-well-documented
 smug
 possible
 infantile
@@ -1324,24 +1295,19 @@ oblong
 each
 timely
 sweet
-ill-informed
-self-reliant
 mushy
 thick
 closed
 remorseful
 other
 legal
-bite-sized
 questionable
 inexperienced
 eminent
-good-natured
 gifted
 lone
 esteemed
 repentant
 angelic
-sure-footed
 mild
 glaring
