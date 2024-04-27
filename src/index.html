@@ -92,8 +92,7 @@
               score += "\u2705";
               temp_score = arrLines.indexOf(v1.toLowerCase());
               temp_score += 1
-              pnrs += v1.toLowerCase() + "+" + temp_score;
-              pnrs += '<br>';
+              pnrs = v1.toLowerCase() + " +" + temp_score + "<br>" + pnrs;
               end_score += temp_score;
               document.getElementById('point_notif').innerHTML = pnrs
               guesses++;
