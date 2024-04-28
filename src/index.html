@@ -75,6 +75,17 @@
       document.getElementById('counter').innerHTML = '';
   }
 
+    function insertLineBreaks(str) {
+      let result = '';
+      for (let i = 0; i < str.length; i++) {
+          result += str[i];
+          if ((i + 1) % 5 === 0) {
+              result += '\n';
+          }
+      }
+      return result;
+  }
+
   function answer_fc(ele){
       event.preventDefault()
       document.getElementById('counter').innerHTML = "";
@@ -108,13 +119,13 @@
               modal.style.display = "block";
               document.getElementById('modal-text').innerHTML = "Congrats! Your score is " + end_score + ".";
               document.getElementById('modal-score').innerHTML = score;
-          // When the user clicks on <span> (x), close the modal
+              // When the user clicks on <span> (x), close the modal
               span.onclick = function() {
                   modal.style.display = "none";
                   document.getElementById('entrybox').disabled = true;
               }
 
-        // When the user clicks anywhere outside of the modal, close it
+          // When the user clicks anywhere outside of the modal, close it
           window.onclick = function(event) {
               if (event.target == modal) {
                   modal.style.display = "none";
@@ -130,7 +141,8 @@
       let year = date.getFullYear();
       // This arrangement can be altered based on how we want the date's format to appear.
       let currentDate = `${month}/${day}/${year}`;
-      var copyText = "Matchectives.com " + currentDate + ": " + end_score + "\n\n" + score;
+      scorewithbreaks = insertLineBreaks(score)
+      var copyText = "matchectives.com" + "\n" + currentDate + ": " + end_score + "\n\n" + scorewithbreaks;
       navigator.clipboard.writeText(copyText);
     }
 
