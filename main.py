@@ -1,4 +1,6 @@
 import requests
+import os
+import re
 from unidecode import unidecode
 
 attempt_index = 0
@@ -108,8 +110,25 @@ for key, value in ret.items():
     words = value
     keyword = key
 
+# This is bad but I'll fix it later lol
+
+with open("./index.txt", "r") as id:
+    index_num = id.read()
+
 with open("./src/words.txt", "w") as out:
     out.write(("\n").join(words))
 
-with open("./src/keyword.txt", "w") as word:
+for filename in os.listdir("./src"):
+    if filename.startswith("keyword"):
+        os.remove(f"./src/{filename}")
+
+with open(f"./src/keyword{index_num}.txt", "w") as word:
     word.write(keyword)
+
+with open("./src/index.html", "r") as rr:
+    index_html = rr.read()
+
+index_html = re.sub('(?<=src="keyword)\d*(?=.txt")', f"{index_num}", index_html)
+
+with open("./src/index.html", "w") as rw:
+    rw.write(index_html)
