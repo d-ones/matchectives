@@ -1,0 +1,21 @@
+name: clear-cache
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["deploy"]
+    types:
+      - completed
+jobs:
+  clearcache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: run curl
+        run: |
+           chmod +x ./update.sh
+           ./update.sh
+        env:
+          cf_api: ${{ secrets.CF_API }}
+          cf_zone: ${{ secrets.CF_ZONE }}
+        shell: bash
