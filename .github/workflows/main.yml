@@ -3,7 +3,7 @@ name: generate words
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 6 * * *"    #runs at 6:30 UTC everyday
+    - cron: "0 4 * * *"    #runs at 6:30 UTC everyday
 
 jobs:
   refreshwords:
