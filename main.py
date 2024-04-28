@@ -5,7 +5,7 @@ attempt_index = 0
 
 
 def find_word(ai):
-    if ai == 3:
+    if ai == 5:
         raise Exception
     else:
         ai += 1
