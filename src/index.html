@@ -33,10 +33,10 @@
       <button type="button" class="copy-button" onclick="copyscore()">Copy</button>
             </div>
       </div>
-<form id="main_form" onsubmit="answer_fc(this.text); this.reset();" novalidate>
+      <form id="main_form" onsubmit="answer_fc(this.text); this.reset();" novalidate>
 
       </div>
-      <input id="entrybox" type="text" required autocomplete="off">
+      <input id="entrybox" type="text" required onkeydown="clearcounter();" autocomplete="off">
       <!-- <span class="highlight"></span> -->
       <span class="bar"></span>
       <label id="keyword"></label>
@@ -63,7 +63,6 @@
   var modal = document.getElementById("myModal");
 
   function init_score() {
-    document.getElementById('counter').innerHTML = score;
     document.getElementById('keyword').innerHTML = keyword;
     }
 
@@ -81,22 +80,25 @@
       var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
       keyword = strRawContents;
       }
+  function clearcounter(){
+      document.getElementById('counter').innerHTML = '';
+  }
 
   function answer_fc(ele){
-    event.preventDefault()
+      event.preventDefault()
       document.getElementById('counter').innerHTML = "";
       var v1 = document.getElementById('entrybox').value;
       if(prior_guesses.includes(v1.toLowerCase())){
-        document.getElementById('counter').innerHTML = "\u26A0\uFE0F";
-        return;
+            document.getElementById('counter').innerHTML = "\u26A0\uFE0F";
+            return;
       }
     if(forbidden_chars.some(substring=>v1.includes(substring))){
-        document.getElementById('counter').innerHTML = "\u26A0\uFE0F";
-        return;
+            document.getElementById('counter').innerHTML = "\u26A0\uFE0F";
+            return;
       }
       prior_guesses.push(v1.toLowerCase())
 
-      if(arrLines.includes(v1.toLowerCase())){
+    if(arrLines.includes(v1.toLowerCase())){
               document.getElementById('counter').innerHTML = "\u2705";
               score += "\u2705";
               temp_score = arrLines.indexOf(v1.toLowerCase());
@@ -107,25 +109,25 @@
               guesses++;
       }
       else {
-      document.getElementById('counter').innerHTML = "\u274c";
-      score += "\u274C"
+              document.getElementById('counter').innerHTML = "\u274c";
+              score += "\u274C"
         }
 
       if (guesses == 5) {
-          modal.style.display = "block";
-          document.getElementById('modal-text').innerHTML = "Congrats! Your score is " + end_score + ".";
-          document.getElementById('modal-score').innerHTML = score;
+              modal.style.display = "block";
+              document.getElementById('modal-text').innerHTML = "Congrats! Your score is " + end_score + ".";
+              document.getElementById('modal-score').innerHTML = score;
           // When the user clicks on <span> (x), close the modal
-          span.onclick = function() {
-              modal.style.display = "none";
-              document.getElementById('entrybox').disabled = true;
+              span.onclick = function() {
+                  modal.style.display = "none";
+                  document.getElementById('entrybox').disabled = true;
               }
 
         // When the user clicks anywhere outside of the modal, close it
           window.onclick = function(event) {
               if (event.target == modal) {
-              modal.style.display = "none";
-              document.getElementById('entrybox').disabled = true;
+                  modal.style.display = "none";
+                  document.getElementById('entrybox').disabled = true;
               }
             }
         }
@@ -137,7 +139,7 @@
       let year = date.getFullYear();
       // This arrangement can be altered based on how we want the date's format to appear.
       let currentDate = `${month}/${day}/${year}`;
-      var copyText = "Matchectives " + currentDate + ": " + end_score + "\n\n" + score;
+      var copyText = "Matchectives.com " + currentDate + ": " + end_score + "\n\n" + score;
       navigator.clipboard.writeText(copyText);
     }
 

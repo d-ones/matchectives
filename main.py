@@ -1,5 +1,5 @@
 import requests
-import time
+from unidecode import unidecode
 
 attempt_index = 0
 
@@ -80,7 +80,7 @@ def find_word(ai):
                 elif word["score"] > metadata["score"]:
                     to_remove.append(plural)
 
-    words = [word["word"] for word in resp]
+    words = [unidecode(word["word"]) for word in resp]
 
     for word in words:
         if " " in word:
