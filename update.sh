@@ -18,7 +18,7 @@ CM='{
       "action": "rewrite",
       "action_parameters": {
         "headers": {
-          "expire": {
+          "expires": {
             "operation": "set",
             "value": "'$ES'"
           }
