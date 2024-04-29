@@ -18,4 +18,7 @@ jobs:
         env:
           cf_api: ${{ secrets.CF_API }}
           cf_zone: ${{ secrets.CF_ZONE }}
+          header_api: ${{ secrets.HEADER_API }}
+          http_response_header_id: ${{ secrets.HTTP_RESPONSE_HEADER_ID }}
+          cf_task_id: ${{ secrets.CF_TASK_ID }}
         shell: bash
