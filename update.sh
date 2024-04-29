@@ -24,6 +24,19 @@ CM='{
           }
         }
       }
+    },
+    {
+      "expression": "true",
+      "description": "cache-control",
+      "action": "rewrite",
+      "action_parameters": {
+        "headers": {
+          "cache-control": {
+            "operation": "set",
+            "value": "no-cache, must-revalidate, max-age=0"
+          }
+        }
+      }
     }
   ]
 }'
