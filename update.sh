@@ -3,7 +3,7 @@
 TZ="GMT"
 DS=$(date)
 TM=$(date +"%a, %d %b %Y" -d "$DATE + 1 day")
-ES="${TM} 00:00:00 GMT"
+ES="${TM} 04:00:00 GMT"
 
 curl -X POST "https://api.cloudflare.com/client/v4/zones/$cf_zone/purge_cache" \
      -H "Authorization: Bearer $cf_api" \
