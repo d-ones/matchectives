@@ -28,6 +28,7 @@ CM='{
   ]
 }'
 
-curl --request PUT https://api.cloudflare.com/client/v4/zones/$cf_zone/rulesets/$http_response_header_id \
-     --header "Authorization: Bearer $header_api" \
-     --header "Content-Type: application/json" --data "$CM"
+curl --X PUT "https://api.cloudflare.com/client/v4/zones/$cf_zone/rulesets/$http_response_header_id" \
+     -H "Authorization: Bearer $header_api" \
+     -H "Content-Type: application/json" \
+     --data "$CM"
