@@ -20,6 +20,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install requests
           python -m pip install unidecode
+          python -m pip install textblob
           python main.py
           git config user.name github-actions
           git config user.email github-actions@github.com
