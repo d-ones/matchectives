@@ -9,6 +9,8 @@ var forbidden_chars = [' ', '-']
 pnrs = '';
 var modal = document.getElementById("myModal");
 
+window.onload = load_kw("keyword.txt");load_wb("words.txt");
+
 let textInput = document.getElementById('entrybox') // take the element value
   textInput.addEventListener('input', (test) => { //whenever event input happend
     if(textInput.value.length == 0){
@@ -18,25 +20,32 @@ let textInput = document.getElementById('entrybox') // take the element value
     document.getElementById('counter').innerHTML = "\uD83D\uDCAC";}
 })
 
-
-function init_score() {
-  document.getElementById('keyword').innerHTML = keyword;
+function load_kw(file){
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById('keyword').innerHTML = xhr.responseText;
+      }
   }
+  xhr.open('GET', file);
+  xhr.send();
+}
 
-function LoadFile() {
-    var oFrame = document.getElementById("frmFile");
-    var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
-    while (strRawContents.indexOf("\r") >= 0)
-        strRawContents = strRawContents.replace("\r", "");
-    arrLines = strRawContents.split("\n");
-    arrLines.reverse()
-    }
+function load_wb(file){
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          strRawContents = xhr.responseText
+          while (strRawContents.indexOf("\r") >= 0)
+              strRawContents = strRawContents.replace("\r", "");
+          arrLines = strRawContents.split("\n");
+          arrLines.reverse()
+      }
+  }
+  xhr.open('GET', file);
+  xhr.send();
+}
 
-function LoadKeyword() {
-    var oFrame = document.getElementById('frmWordFile');
-    var strRawContents = oFrame.contentWindow.document.body.childNodes[0].innerHTML;
-    keyword = strRawContents;
-    }
 
   function insertLineBreaks(str) {
     let result = '';

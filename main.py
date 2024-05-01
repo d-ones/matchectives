@@ -88,6 +88,16 @@ def find_word(ai):
         if "-" in word:
             to_remove.append(word)
 
+    # terrible fallback way to do +s plurals that still get through
+
+    for index, word in enumerate(words):
+        if index + 1 != len(words):
+            if str(word) + "s" in words[index + 1 :]:
+                to_remove.append(str(word + "s"))
+            if word[-1] == "s":
+                if word[:-1] in words[index + 1 :]:
+                    to_remove.append(str(word[:-1]))
+
     for entry in to_remove:
         try:
             words.remove(entry)
