@@ -1,7 +1,11 @@
 import requests
+from textblob import Word
+import nltk
+import json
 from unidecode import unidecode
 
 attempt_index = 0
+nltk.download("wordnet")
 
 
 def find_word(ai):
@@ -25,62 +29,15 @@ def find_word(ai):
     keyword = keyword.strip("\n")
 
     try:
-        req = requests.get(
-            f"https://api.datamuse.com/words?rel_jja={keyword}&md=d&max=150"
-        )
+        req = requests.get(f"https://api.datamuse.com/words?rel_jja={keyword}&max=150")
     except requests.exceptions.RequestException as e:
         return find_word(ai)
 
     resp = req.json()
 
-    plurals = {}
-
-    for word in resp:
-        if word.get("defHeadword"):
-            plurals.update(
-                {
-                    word["word"]: {
-                        "score": word["score"],
-                        "headword": word["defHeadword"],
-                    }
-                }
-            )
-
     to_remove = []
 
-    occurences_list = [metadata["headword"].lower() for metadata in plurals.values()]
-
-    derivations = set()
-
-    for item in occurences_list:
-        if occurences_list.count(item) > 1:
-            derivations.add(item)
-
-    for rep_word in derivations:
-        to_compare = []
-        for plural, metadata in plurals.items():
-            if metadata["headword"].lower() == rep_word:
-                to_compare.append({plural: {"score": metadata["score"]}})
-        score = 0
-        for item in to_compare:
-            for metadata in item.values():
-                if metadata["score"] > score:
-                    score = metadata["score"]
-        for item in to_compare:
-            for key, metadata in item.items():
-                if metadata["score"] != score:
-                    to_remove.append(key)
-                    plurals.pop(key)
-
-    for plural, metadata in plurals.items():
-        for word in resp:
-            if word["word"].lower() == metadata["headword"].lower():
-                if word["score"] < metadata["score"]:
-                    to_remove.append(word["word"])
-                elif word["score"] > metadata["score"]:
-                    to_remove.append(plural)
-
-    words = [unidecode(word["word"]) for word in resp]
+    words = [word["word"] for word in resp]
 
     for word in words:
         if " " in word:
@@ -88,25 +45,27 @@ def find_word(ai):
         if "-" in word:
             to_remove.append(word)
 
-    # terrible fallback way to do +s plurals that still get through
-
-    for index, word in enumerate(words):
-        if index + 1 != len(words):
-            if str(word) + "s" in words[index + 1 :]:
-                to_remove.append(str(word + "s"))
-            if word[-1] == "s":
-                if word[:-1] in words[index + 1 :]:
-                    to_remove.append(str(word[:-1]))
-
     for entry in to_remove:
         try:
             words.remove(entry)
         except ValueError:
             pass
 
-    if len(words) >= 50:
-        words = words[:50]
-        return {keyword: words}
+    words_flattened = []
+
+    for word in words:
+        w = Word(word)
+        base = w.lemmatize()
+        if base not in words_flattened:
+            words_flattened.append(base)
+
+    if len(words_flattened) >= 50:
+        score_dict = {}
+        words_flattened = words_flattened[:50]
+        for index, word in enumerate(words_flattened[::-1]):
+            plural = Word(word).pluralize()
+            score_dict.update({index + 1: [word, plural]})
+        return {keyword: score_dict}
 
     else:
         return find_word(ai)  # Need to get a new word
@@ -118,8 +77,8 @@ for key, value in ret.items():
     words = value
     keyword = key
 
-with open("./src/words.txt", "w") as out:
-    out.write(("\n").join(words))
+with open("./src/words.json", "w") as out:
+    json.dump(words, out)
 
 with open("./src/keyword.txt", "w") as word:
     word.write(keyword)
