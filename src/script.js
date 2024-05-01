@@ -9,7 +9,10 @@ var forbidden_chars = [' ', '-']
 pnrs = '';
 var modal = document.getElementById("myModal");
 
-window.onload = load_kw("keyword.txt");load_wb("words.txt");
+window.onload=function(){
+load_kw("keyword.txt");
+load_wb("words.txt");
+}
 
 let textInput = document.getElementById('entrybox') // take the element value
   textInput.addEventListener('input', (test) => { //whenever event input happend
