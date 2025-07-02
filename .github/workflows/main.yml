@@ -2,8 +2,8 @@ name: generate words
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 4 * * *"    #runs at midnight EST everyday
+  # schedule:
+    # - cron: "0 4 * * *"    #runs at midnight EST everyday
 
 jobs:
   refreshwords:
